@@ -1,11 +1,17 @@
+/******************************************************************************
+ *  Purpose:	Update operation of Database
+ *
+ *  @author  Zeeshan
+ *  @version 1.0
+ *  @since   23-06-2018
+ *
+ ******************************************************************************/
 package jdbc;
 import java.sql.*;
-import java.util.Scanner;
 import utility.Utility;
 public class Update {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
-			Scanner scan=new Scanner(System.in);
 			String sql="";
 			int id=0,age=0;
 			java.sql.Connection conn = null;
@@ -21,18 +27,18 @@ public class Update {
 			System.out.println(employees);
 			}
 		    System.out.println("enter id of employee to edit");
-		    int empID=scan.nextInt();
+		    int empID=Utility.inputInteger();
 		    System.out.println("select choice to edit : \n"+
 		    " 1-id \n"+" 2-age \n");
-		    int choice=scan.nextInt();
+		    int choice=Utility.inputInteger();
 		    switch(choice)
 		    {
 		    case 1:System.out.println("enter new id");
-		    id=scan.nextInt();
+		    id=Utility.inputInteger();
 		    sql = "UPDATE employees SET id = "+id+" WHERE id in ("+empID+")";
 		    break;
 		    case 2:System.out.println("enter new age");
-		    age=scan.nextInt();
+		    age=Utility.inputInteger();
 		    sql = "UPDATE employees SET age = "+age+" WHERE id in ("+empID+")";
 		    break;
 		    }	    
@@ -48,7 +54,6 @@ public class Update {
 
 		    stmt.close();
 		    conn.close();
-		    scan.close();
 		   
 	}
 

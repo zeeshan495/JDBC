@@ -1,11 +1,17 @@
+/******************************************************************************
+ *  Purpose:	delete operation of Database
+ *
+ *  @author  Zeeshan
+ *  @version 1.0
+ *  @since   23-06-2018
+ *
+ ******************************************************************************/
 package jdbc;
 import java.sql.*;
-import java.util.Scanner;
 import utility.Utility;
 public class Delete {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
-			Scanner scan=new Scanner(System.in);
 			String sql="";
 			java.sql.Connection conn = null;
 			Statement stmt = null;
@@ -20,7 +26,7 @@ public class Delete {
 			System.out.println(employees);
 			}
 		    System.out.println("enter id of employee to delete");
-		    int empID=scan.nextInt();
+		    int empID=Utility.inputInteger();
 		    	
 		    sql = "delete from employees where id ="+ empID;
 		    stmt.executeUpdate(sql);
@@ -35,7 +41,6 @@ public class Delete {
 
 		    stmt.close();
 		    conn.close();
-		    scan.close();
 		   
 	}
 
