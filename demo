@@ -1,0 +1,9 @@
+SET SQL_SAFE_UPDATES=0;
+select * from student;
+insert into student values(8,'aab');
+rollback;
+-- commit;
+delete from student where rollno=3;
+show databases;
+select avg(rollno) from student;
+select * from student order by rollno;
