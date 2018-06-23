@@ -1,6 +1,8 @@
 package utility;
 import java.sql.*;
 import java.util.Scanner;
+
+import model.Data;
 public class Utility {
 	public static final String DB_driver="com.mysql.jdbc.Driver";
 	public static final String url="jdbc:mysql://localhost:3306/EMPLOYEES";
@@ -52,8 +54,7 @@ public class Utility {
 	 * @throws ClassNotFoundException
 	 */
 	public static Connection getConnection() throws SQLException, ClassNotFoundException
-	{
-		
+	{	
 		Class.forName(DB_driver);
 		connection=DriverManager.getConnection(url,uname,pwd);
 		return connection;
@@ -118,22 +119,24 @@ public class Utility {
 		String employees=rs.getInt("id")+" : "+rs.getString("ename")+" : "+rs.getInt("age");
 		System.out.println(employees);
 		}
-	    System.out.println("enter id of employee to edit");
-	    int empID=scan.nextInt();
-	    System.out.println("select choice to edit : \n"+
-	    " 1-id \n"+" 2-age \n");
-	    int choice=scan.nextInt();
-	    switch(choice)
-	    {
-	    case 1:System.out.println("enter new id");
-	    id=scan.nextInt();
-	    sql = "UPDATE employees SET id = "+id+" WHERE id in ("+empID+")";
-	    break;
-	    case 2:System.out.println("enter new age");
-	    age=scan.nextInt();
-	    sql = "UPDATE employees SET age = "+age+" WHERE id in ("+empID+")";
-	    break;
-	    }	    
+//	    System.out.println("enter id of employee to edit");
+//	    int empID=scan.nextInt();
+//	    System.out.println("select choice to edit : \n"+
+//	    " 1-id \n"+" 2-age \n");
+//	    int choice=scan.nextInt();
+//	    switch(choice)
+//	    {
+//	    case 1:System.out.println("enter new id");
+//	    id=scan.nextInt();
+//	    sql = "UPDATE employees SET id = "+id+" WHERE id in ("+empID+")";
+//	    break;
+//	    case 2:System.out.println("enter new age");
+//	    age=scan.nextInt();
+//	    sql = "UPDATE employees SET age = "+age+" WHERE id in ("+empID+")";
+//	    break;
+//	    }	    
+//		Data updatedData=updateDB();
+//		sql = "UPDATE employees SET age = "+age+" WHERE id in ("+empID+")";
 	    stmt.executeUpdate(sql);
 	    sql = "select * from employees";
 	    ResultSet rs2=stmt.executeQuery(sql);
@@ -184,6 +187,18 @@ public class Utility {
 	    stmt.close();
 	    connection.close();
 	    scan.close();
+		
+	}
+	
+	public static Data updateDB(){
+		Data data=new Data();
+		System.out.println("enter ID");
+		data.setId(Utility.inputInteger());
+		System.out.println("enter employee name");
+		data.setEname(Utility.inputString());
+		System.out.println("enter age");
+		data.setAge(Utility.inputInteger());
+		return data;	
 		
 	}
 
